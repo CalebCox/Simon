@@ -1,9 +1,15 @@
+body {
+    margin-top: 50px;
+}
+
 .container {
     height: 472px;
     width: 472px;
-    margin: 0 auto;
     background: black;
     border-radius: 100%;
+    position: relative;
+    text-align: center;
+    margin: auto;
 }
 
 .inset {
@@ -11,9 +17,9 @@
     top: 12px;
 }
 
-.row {
-    margin-bottom: 4px;
-}
+/*.row {*/
+    /*margin-bottom: 4px;*/
+/*}*/
 
 .green,
 .yellow,
@@ -21,6 +27,8 @@
 .red {
     height: 200px;
     width: 200px;
+    display: inline-block;
+    border: 12px solid black;
 }
 
 .green {
@@ -41,4 +49,70 @@
 .red {
     background: red;
     border-top-right-radius: 100%;
+}
+
+.center {
+    height: 220px;
+    width: 220px;
+    margin: 0;
+    position: relative;
+    bottom: 350px;
+    left: 110px;
+    border-radius: 100%;
+    background: white;
+    border: 12px solid black;
+}
+
+h1 {
+    margin-top: 45px;
+}
+
+.controls {
+    display: inline-block;
+}
+
+.counter {
+    position: relative;
+    right: 60px;
+}
+
+.counter > p {
+    margin: 0;
+}
+
+.value {
+    background: darkgray;
+    padding: 5px;
+    color: white;
+    border-radius: 25%;
+    border: 2px solid gray;
+}
+
+button {
+    position: relative;
+    bottom: 35px;
+    border-radius: 30%;
+    height: 32px;
+    background: lightgrey;
+    border: 1px solid gray;
+}
+
+.indicator {
+    height: 10px;
+    width: 10px;
+    background: darkred;
+    border-radius: 100%;
+    border: 2px solid gray;
+    position: relative;
+    bottom: 85px;
+    left: 66px;
+}
+
+.indicator-on {
+    background: lawngreen;
+}
+
+.strict {
+    left: 50px;
+    bottom: 81px;
 }
