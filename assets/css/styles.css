@@ -1,0 +1,44 @@
+.container {
+    height: 472px;
+    width: 472px;
+    margin: 0 auto;
+    background: black;
+    border-radius: 100%;
+}
+
+.inset {
+    position: relative;
+    top: 12px;
+}
+
+.row {
+    margin-bottom: 4px;
+}
+
+.green,
+.yellow,
+.blue,
+.red {
+    height: 200px;
+    width: 200px;
+}
+
+.green {
+    background: green;
+    border-top-left-radius: 100%;
+}
+
+.yellow {
+    background: yellow;
+    border-bottom-left-radius: 100%;
+}
+
+.blue {
+    background: blue;
+    border-bottom-right-radius: 100%;
+}
+
+.red {
+    background: red;
+    border-top-right-radius: 100%;
+}
