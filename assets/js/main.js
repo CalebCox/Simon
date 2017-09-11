@@ -80,19 +80,18 @@ function updatePlayerMoves(move) {
 function playerMove(color) {
     if (game.player[game.player.length - 1] !== game.current[game.player.length - 1]) {
         if(game.strict){
-            alert('Try again! ...From scratch!');
+            alert('Wrong move! Start over!');
             newGame();
         } else {
             alert('Wrong move! Try again!');
             showMoves();
         }
     } else {
-        console.log('Good Move!');
         sound(color);
         var check = game.player.length === game.current.length;
         if (check) {
             if(game.count === 20){
-                alert('You won! Congrats.');
+                alert('You won!');
             } else {
                 alert('Next round!');
                 addCount();
