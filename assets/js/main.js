@@ -67,9 +67,10 @@ function normalGame() {
             var currentColor = compPattern[i];
             console.log('Current Color before addClass: ' + currentColor);
             $(".btn[data-color='" + currentColor + "']").addClass(currentColor + "-light");
+            // removeClass(currentColor);
             setTimeout(function () {
-                console.log('Current Color after addClass: ' + currentColor);
-                $(".btn[data-color='" + currentColor + "']").removeClass(currentColor + "-light");
+                console.log('Current Color after addClass: ' + buttonColor);
+                $(".btn[data-color='" + buttonColor + "']").removeClass(buttonColor + "-light");
             }, 1000);
         }
 
@@ -91,3 +92,10 @@ function normalGame() {
         }
     }
 }
+
+// function removeClass(buttonColor) {
+//     setTimeout(function () {
+//         console.log('Current Color after addClass: ' + buttonColor);
+//         $(".btn[data-color='" + buttonColor + "']").removeClass(buttonColor + "-light");
+//     }, 1000);
+// }
