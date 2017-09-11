@@ -37,18 +37,34 @@ body {
 }
 
 .yellow {
-    background: yellow;
+    background: gold;
     border-bottom-left-radius: 100%;
 }
 
 .blue {
-    background: blue;
+    background: darkblue;
     border-bottom-right-radius: 100%;
 }
 
 .red {
-    background: red;
+    background: darkred;
     border-top-right-radius: 100%;
+}
+
+.green-light {
+    background: greenyellow;
+}
+
+.yellow-light {
+    background: yellow;
+}
+
+.blue-light {
+    background: blue;
+}
+
+.red-light {
+    background: red;
 }
 
 .center {

@@ -1,101 +1,119 @@
-var compPattern = [];
-var playerPattern = [];
-var strict = false;
-var computerChoice;
-var gameOn = false;
-var playerTurn = false;
+var game = {
+    count: 0,
+    strict: false,
+    colors: ['green','red','yellow','blue'],
+    current: [],
+    player: [],
+    sound: {
+        blue: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
+        red: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
+        yellow: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+        green: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3')
+    }
+};
 
-$('.start').click(function() {
-    startGame();
+$('.start').click(function () {
+    if (game.strict) {
+        game.strict = false;
+        $('.indicator').removeClass('indicator-on');
+    }
+    newGame();
 });
 
-function startGame() {
-    if (strict && !gameOn) {
-        gameOn = true;
-        computerChoice = Math.floor(Math.random() * 4) + 1;
-        switch (computerChoice) {
-            case 1:
-                compPattern.push('green');
-                break;
-            case 2:
-                compPattern.push('red');
-                break;
-            case 3:
-                compPattern.push('yellow');
-                break;
-            case 4:
-                compPattern.push('blue');
-                break;
-        }
-        playerTurn = true;
-        strictGame();
-    } else if (!strict && !gameOn) {
-        gameOn = true;
-        computerChoice = Math.floor(Math.random() * 4) + 1;
-        switch (computerChoice) {
-            case 1:
-                compPattern.push('green');
-                break;
-            case 2:
-                compPattern.push('red');
-                break;
-            case 3:
-                compPattern.push('yellow');
-                break;
-            case 4:
-                compPattern.push('blue');
-                break;
-        }
-        playerTurn = true;
-        normalGame();
-    }
+$('.strict').click(function () {
+    game.strict = true;
+    $('.indicator').addClass('indicator-on');
+    newGame();
+});
+
+$('.btn').click(function () {
+    var color = $(this).data('color');
+    updatePlayerMoves(color);
+});
+
+function newGame() {
+    game.count = 0;
+    game.current = [];
+    addCount();
 }
 
-function strictGame() {
-
+function addCount() {
+    game.count++;
+    $('.value').html(game.count);
+    generateColor();
 }
 
-function gameOver() {
-
-    gameOn = false;
+function generateColor() {
+    game.current.push(game.colors[(Math.floor(Math.random() * 4))]);
+    showMoves();
 }
 
-function normalGame() {
-    // has issue where it lights up all comp choices at once and only removes the color from the last indexed color.
-    if(playerTurn) {
-        for (var i = 0; i < compPattern.length; i++) {
-            var currentColor = compPattern[i];
-            console.log('Current Color before addClass: ' + currentColor);
-            $(".btn[data-color='" + currentColor + "']").addClass(currentColor + "-light");
-            // removeClass(currentColor);
-            setTimeout(function () {
-                console.log('Current Color after addClass: ' + buttonColor);
-                $(".btn[data-color='" + buttonColor + "']").removeClass(buttonColor + "-light");
-            }, 1000);
+function showMoves() {
+    var i = 0;
+    var moves = setInterval(function () {
+        playGame(game.current[i]);
+        i++;
+        if (i >= game.current.length) {
+            clearInterval(moves);
         }
+    }, 1000);
+    resetPlayer();
+}
 
+function playGame(moves) {
+    $(".btn[data-color='" + moves + "']").addClass(moves + "-light");
+    sound(moves);
+    setTimeout(function () {
+        $(".btn[data-color='" + moves + "']").removeClass(moves + "-light");
+    }, 500);
+}
+
+function resetPlayer() {
+    game.player = [];
+}
+
+function updatePlayerMoves(move) {
+    game.player.push(move);
+    playerMove(move);
+}
+
+function playerMove(color) {
+    if (game.player[game.player.length - 1] !== game.current[game.player.length - 1]) {
+        if(game.strict){
+            alert('Try again! ...From scratch!');
+            newGame();
+        } else {
+            alert('Wrong move! Try again!');
+            showMoves();
+        }
     } else {
-        computerChoice = Math.floor(Math.random() * 4) + 1;
-        switch (computerChoice) {
-            case 1:
-                compPattern.push('green');
-                break;
-            case 2:
-                compPattern.push('red');
-                break;
-            case 3:
-                compPattern.push('yellow');
-                break;
-            case 4:
-                compPattern.push('blue');
-                break;
+        console.log('Good Move!');
+        sound(color);
+        var check = game.player.length === game.current.length;
+        if (check) {
+            if(game.count === 20){
+                alert('You won! Congrats.');
+            } else {
+                alert('Next round!');
+                addCount();
+            }
         }
     }
 }
 
-// function removeClass(buttonColor) {
-//     setTimeout(function () {
-//         console.log('Current Color after addClass: ' + buttonColor);
-//         $(".btn[data-color='" + buttonColor + "']").removeClass(buttonColor + "-light");
-//     }, 1000);
-// }
+function sound(color) {
+    switch (color) {
+        case 'green':
+            game.sound.green.play();
+            break;
+        case 'red':
+            game.sound.red.play();
+            break;
+        case 'yellow':
+            game.sound.yellow.play();
+            break;
+        case 'blue':
+            game.sound.blue.play();
+            break;
+    }
+}
