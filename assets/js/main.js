@@ -34,6 +34,7 @@ $('.btn').click(function () {
 function newGame() {
     game.count = 0;
     game.current = [];
+    $('.status').html('').removeClass('good' && 'bad');
     addCount();
 }
 
@@ -80,21 +81,30 @@ function updatePlayerMoves(move) {
 function playerMove(color) {
     if (game.player[game.player.length - 1] !== game.current[game.player.length - 1]) {
         if(game.strict){
-            alert('Wrong move! Start over!');
-            newGame();
+            $('.status').html('Wrong move! Start over!').addClass('bad');
+            setTimeout(function() {
+                $('.status').removeClass('bad');
+                newGame();
+            }, 2000);
         } else {
-            alert('Wrong move! Try again!');
-            showMoves();
+            $('.status').html('Wrong move! Watch closely and try again!').addClass('bad');
+            setTimeout(function () {
+                $('.status').html('').removeClass('bad');
+                showMoves();
+            }, 2000);
         }
     } else {
         sound(color);
         var check = game.player.length === game.current.length;
         if (check) {
             if(game.count === 20){
-                alert('You won!');
+                $('.status').html('You won! Press Start to start new game!').addClass('good');
             } else {
-                alert('Next round!');
-                addCount();
+                $('.status').html('Next round! Pay attention!');
+                setTimeout(function () {
+                    $('.status').html('');
+                    addCount();
+                }, 2000);
             }
         }
     }

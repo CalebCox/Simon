@@ -15,11 +15,8 @@ body {
 .inset {
     position: relative;
     top: 12px;
+    height: 472px;
 }
-
-/*.row {*/
-    /*margin-bottom: 4px;*/
-/*}*/
 
 .green,
 .yellow,
@@ -131,4 +128,12 @@ button {
 .strict {
     left: 50px;
     bottom: 81px;
+}
+
+.good {
+    color: green;
+}
+
+.bad {
+    color: red;
 }
